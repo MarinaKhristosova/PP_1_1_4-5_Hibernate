@@ -28,7 +28,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery(sql).executeUpdate();
             session.getTransaction().commit();
             System.out.println("Table created");
-            sessionFactory.close();
+            session.close();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -47,7 +47,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery(sql).executeUpdate();
             session.getTransaction().commit();
             System.out.println("Table dropped");
-            sessionFactory.close();
+            session.close();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -65,7 +65,7 @@ public class UserDaoHibernateImpl implements UserDao {
             User user = new User(name, lastName, age);
             session.save(user);
             session.getTransaction().commit();
-            sessionFactory.close();
+            session.close();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -83,7 +83,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.delete(user);
             session.getTransaction().commit();
             System.out.println(user + " with ID №" + id + " deleted");
-            sessionFactory.close();
+            session.close();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -102,7 +102,7 @@ public class UserDaoHibernateImpl implements UserDao {
             list = session.createQuery("from User").getResultList();
             session.getTransaction().commit();
             System.out.println(list);
-            sessionFactory.close();
+            session.close();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -119,7 +119,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createQuery("delete User").executeUpdate();
             session.getTransaction().commit();
             System.out.println("Table is truncated");
-            sessionFactory.close();
+            session.close();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
